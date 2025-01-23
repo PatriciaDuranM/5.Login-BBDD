@@ -1,6 +1,6 @@
-// const express = require("express");
-// const usersRoutes = express.Router();
-// const usersController = require("../controllers/users.controller");
+const express = require("express");
+const usersRoutes = express.Router();
+const usersController = require("../controllers/users.controller");
 
 // /*LEER*/
 // usersRoutes.get("/", usersController.getAllUsers);
@@ -8,8 +8,8 @@
 // /*encontrar usuario por id*/
 // usersRoutes.get("/:id", usersController.getUserById);
 
-// /*CREAR*/
-// usersRoutes.post("/", usersController.createNewUser);
+/*CREAR*/
+usersRoutes.post("/", usersController.createUser);
 
 // /* ACTUALIZAR los datos con PATCH*/
 // usersRoutes.patch("/:id", usersController.updateUsers);
@@ -18,4 +18,4 @@
 // usersRoutes.delete("/:id", usersController.deleteUser);
 
 // /*exportacion de las rutas*/
-// module.exports = usersRoutes;
+module.exports = usersRoutes;

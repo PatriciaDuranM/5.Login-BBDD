@@ -26,7 +26,9 @@ export const GlobalStyles = createGlobalStyle`
 
     body{
         font-family: sans-serif;
+        color: aliceblue;
         margin: 0;
+        background-color: #333;
     }
 
 `;

@@ -1,7 +1,19 @@
-// const usersController = {};
-// const fs = require("fs");
-// const path = require("path");
-// const pathFile = path.resolve(__dirname, "../../data/users.json");
+const UserModel = require("../models/user.model");
+const usersController = {};
+
+usersController.createUser = async (req, res) => {
+  const userInfo = req.body;
+  const newUsers = new UserModel({ ...userInfo });
+  try {
+    await newUsers.save();
+    const allUsers = await UserModel.find();
+    return res.status(200).json(allUsers);
+  } catch (error) {
+    return res.status(500).json({ error: "Error reading database" + error });
+  }
+};
+
+module.exports = usersController;
 
 // usersController.getAllUsers = (req, res) => {
 //   /*Primero leemos*/
@@ -13,31 +25,6 @@
 //       /*Guardamos la información leida*/
 //       const jsonData = JSON.parse(data);
 //       res.status(200).json(jsonData);
-//     }
-//   });
-// };
-
-// usersController.createNewUser = (req, res) => {
-//   /*Los nuevos datos que introducimos son en req.body*/
-//   const newUser = req.body;
-//   /*Primero Leer los datos disponibles*/
-//   fs.readFile(pathFile, (error, data) => {
-//     if (error) {
-//       /*enviamos una respuesta de error si no se ha leido bien*/
-//       res.status(500).json({ error: "Error al leer el archivo" });
-//     } else {
-//       /*guardar los datos originales*/
-//       const jsonData = JSON.parse(data);
-//       /*guardar los datos originales + los nuevos que introucidmos de new data*/
-//       const newData = [...jsonData, newUser];
-//       /*Tenemos todos los datos en newData, ahora tenemos que escribirlos*/
-//       fs.writeFile(pathFile, JSON.stringify(newData), (error) => {
-//         if (error) {
-//           res.status(500).json({ error: "Error al guardar la informacion" });
-//         } else {
-//           res.status(201).json(newData);
-//         }
-//       });
 //     }
 //   });
 // };
@@ -118,5 +105,3 @@
 //     }
 //   });
 // };
-
-// module.exports = usersController;
